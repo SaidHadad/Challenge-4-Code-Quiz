@@ -1,0 +1,31 @@
+.wrapper {
+    max-width: 1140px;
+    width: 90%;
+    margin: 0 auto;
+    border-width: 2px;
+}
+
+header {
+    height: 15vh;
+    min-height: 140px;
+    background-color: black;
+    color: white;
+}
+
+header nav {
+    display: flex;
+    justify-content: flex-end;
+}
+header p {
+    padding: 5px;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+}
+header h2 {
+    text-align: center;
+    margin: 0px 0px 10px 0px;
+}
