@@ -10,33 +10,49 @@
 <body>
     <header>
         <div class="wrapper">
-            <nav>
-                <p>Time:</p>
-                <p>100</p>
+            <nav id="timer">
+                <p>Time: 50</p>
             </nav>
             <h1>Code Quiz</h1>
             <h2>Get ready to get tested!</h2>
         </div>
     </header>
     <main>
-        <div class="wrapper">
-            <div class="highscores">
+        <div class="main-wrapper">
+            <table id="highscores">
                 <h2>Highscores</h2>
-                <ol>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                </ol>
-            </div>
+                <p id="name">a</p>
+                <p id="score">a</p>
+            </table>
             <div class="controls">
-                <input type="button" value="Start">
-                <input type="button" value="Reset">
+                <input id="start" type="button" value="Start">
+                <input id="reset" type="button" value="Reset">
             </div>
-            <div class="questions">
+            <div class="questionCards">
+                <div class="cardcontainer">
+                    <div class="cardbody">
+                        <h3>Questions</h3>
+                        <p id="cardtext">Lorem ipsum dolor sit amet.</p>
+                        <div class="answers">
+                            <a href="#" class="answerBtn" id="button1">Lorem, ipsum.</a>
+                        </div>
+                        <div class="answers">
+                            <a href="#" class="answerBtn" id="button2">Lorem, ipsum.</a>
+                        </div>
+                        <div class="answers">
+                            <a href="#" class="answerBtn" id="button3">Lorem, ipsum.</a>
+                        </div>
+                        <div class="answers">
+                            <a href="#" class="answerBtn" id="button4">Lorem, ipsum.</a>
+                        </div>
+                        <div class="answers">
+                            <p id="veracity"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
+    <script type="text/javascript" src="./assets/script.js"></script>
 </body>
 </html>
