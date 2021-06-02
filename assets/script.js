@@ -48,21 +48,14 @@ var questions = [{
     answer4: "16",
     correct: "16"
 }];
-
+var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+var highScorePrint = document.querySelector(".scoresHTML");
+var clearHighScore = document.getElementById("reset");
 
 // timer
 var time = document.getElementById("timer");
 var hst = document.getElementById("highscores");
-var highscores = [];
-
 var timeleft = 50;
-
-// highscores
-
-function highscore(initials, timeleft) {
-    highscores.push({"initials":initials, "timeleft":timeleft});
-    document.getElementById("name").textContent = highscores[0].initials;
-}
 
 function setTime(){
     var timerInterval = setInterval(function() {
@@ -77,24 +70,34 @@ function setTime(){
             clearInterval(timerInterval);
             console.log(timeleft);
             var initials = window.prompt("Your score is: " + timeleft + ". Please add your initials to submit your score." );
-            highscore(initials, timeleft);
+            if (initials) {
+                // event.stopPropagation();
+                console.log("click");
+                var finalScore = {initials, timeleft};
+                console.log("Final Score: " + finalScore);
+                console.log(initials + " your score is: " + timeleft); 
+                // Send to localStorage
+                highscores.push(finalScore);
+                localStorage.setItem("highscores", JSON.stringify(highscores));
+                printHighScore();
+                timeleft = 50;
+                runningQuestion = 0;
+                question = 0;
+            }
         }
     }, 1000)
 }
-
 
 // start the game
 var startButton = document.getElementById("start");
 var cardQuestions = document.getElementById("questionCards")
 var questioncards = document.getElementsByClassName("questioncards");
-
 startButton.addEventListener("click", startGame);
 
 function startGame(){
-    setTime();
-    questionnaire();
-    console.log("we did it");
-
+        setTime();
+        questionnaire();
+        console.log("we did it");
 }
 
 //Questions
@@ -124,12 +127,12 @@ for (var i = 0; i < answerBtn.length; i++) {
         event.stopPropagation();
         if (event.currentTarget.innerText === questions[runningQuestion].correct){
         rightAnswer.textContent = "Correct + 5 sec";
-        rightAnswer.setAttribute("style", "color: yellow");
+        rightAnswer.setAttribute("style", "color: black", "font-size: 1.5em");
         timeleft = timeleft + 5;
         console.log("correct");
     } else {
         incorrectAnswer.textContent = "Incorrect - 5 sec";
-        incorrectAnswer.setAttribute("style", "color: red");
+        incorrectAnswer.setAttribute("style", "color: red", "font-size: 1.5em");
         timeleft = timeleft - 5;
         console.log("Incorrect minus 5 seconds");
     }
@@ -141,5 +144,30 @@ for (var i = 0; i < answerBtn.length; i++) {
 });
 }
 
-// var retrievedScores = {"initials":initials , "timeleft":timeleft}
-//     hst.innerHTML += "<tr><td>" + retrievedScores[i].name + "</td><td>" + retrievedScores[i].score + "</td></tr>";
+function printHighScore() {
+    console.log('im in');
+    highscores = scoresSorted(highscores, 'score');
+    for (var i = 0; i < highscores.length; i++) {
+        console.log(highscores[i].timeleft);
+        var home = document.createElement("li"); 
+        var words = document.createTextNode(highscores[i].initials + ": " + highscores[i].timeleft)  ; //content of p
+        home.appendChild(words);
+        highScorePrint.appendChild(home);
+    }
+}
+
+function scoresSorted(array, key) {
+    return array.sort(function(a,b) {
+    if (a.timeleft < b.timeleft) {
+        return 1;
+    }
+    return -1;
+    });
+}
+
+clearHighScore.addEventListener("click", function() {
+    console.log("reset")
+    localStorage.removeItem("highscores");
+    window.location.reload();
+});
+
