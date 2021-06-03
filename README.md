@@ -93,7 +93,7 @@ Free to use, share the knowledge!!.
 
 Said Hadad - saiddavid.hadad@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://saidhadad.github.io/Challenge-3-JS-PassGenerator/)
+Project Link: [https://github.com/your_username/repo_name](https://saidhadad.github.io/Challenge-4-Code-Quiz//)
 
 
 
