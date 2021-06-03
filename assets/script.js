@@ -144,18 +144,20 @@ for (var i = 0; i < answerBtn.length; i++) {
 });
 }
 
+// function to print the highscores (work in progress)
 function printHighScore() {
     console.log('im in');
     highscores = scoresSorted(highscores, 'score');
     for (var i = 0; i < highscores.length; i++) {
         console.log(highscores[i].timeleft);
         var home = document.createElement("li"); 
-        var words = document.createTextNode(highscores[i].initials + ": " + highscores[i].timeleft)  ; //content of p
+        var words = document.createTextNode(highscores[i].initials + ": " + highscores[i].timeleft);
         home.appendChild(words);
         highScorePrint.appendChild(home);
     }
 }
 
+// function to sort the scores 
 function scoresSorted(array, key) {
     return array.sort(function(a,b) {
     if (a.timeleft < b.timeleft) {
@@ -165,6 +167,7 @@ function scoresSorted(array, key) {
     });
 }
 
+// clear button 
 clearHighScore.addEventListener("click", function() {
     console.log("reset")
     localStorage.removeItem("highscores");
