@@ -1,10 +1,4 @@
 <!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h1 align="center"># Web APIs Challenge: Code Quiz (Math Quiz for the lulz</h1>
 
   <p align="center">
@@ -44,7 +38,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![PassGenerator](./assets./photo.PNG)
+![PassGenerator](./assets/photo.PNG)
 
 A fun, fast paced math quiz!! It goes from a basic 0+1... How fast can you be?... done as part of my 4th project for the UofT bootcamp
 
