@@ -48,27 +48,58 @@ var questions = [{
     answer4: "16",
     correct: "16"
 }];
+
 var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
 var highScorePrint = document.querySelector(".scoresHTML");
 var clearHighScore = document.getElementById("reset");
+
+//Questions
+var answer1 = document.getElementById("button1");
+var answer2 = document.getElementById("button2");
+var answer3 = document.getElementById("button3");
+var answer4 = document.getElementById("button4");
+var question = document.getElementById("cardtext");
+var veracityP = document.getElementById("veracity");
+var runningQuestion = 0;
 
 // timer
 var time = document.getElementById("timer");
 var hst = document.getElementById("highscores");
 var timeleft = 50;
+//game start
+var startButton = document.getElementById("start");
+var cardQuestions = document.getElementById("questionCards")
+var questioncards = document.getElementsByClassName("questioncards");
+document.querySelector('.questionsContainer').classList.add("disable_a_href");
 
+function startGame(){
+    if (timeleft != 50)
+    {
+        timeleft = 50;
+        console.log("replay");
+        startButton.value = "Start"
+        window.location.reload();
+    }
+    else {    
+        setTime();
+        questionnaire();
+        document.querySelector('.questionsContainer').classList.remove("disable_a_href");
+        console.log("we did it");
+    }
+}
+
+// timer function 
 function setTime(){
     var timerInterval = setInterval(function() {
         timeleft--;
-        console.log(timeleft);
         time.textContent = "Time: " + timeleft;
         if(timeleft === 0){
             clearInterval(timerInterval);
             window.alert("You lost the game :(")
+
         }
         else if (runningQuestion === 7) {
             clearInterval(timerInterval);
-            console.log(timeleft);
             var initials = window.prompt("Your score is: " + timeleft + ". Please add your initials to submit your score." );
             if (initials) {
                 // event.stopPropagation();
@@ -80,35 +111,13 @@ function setTime(){
                 highscores.push(finalScore);
                 localStorage.setItem("highscores", JSON.stringify(highscores));
                 printHighScore();
-                timeleft = 50;
                 runningQuestion = 0;
                 question = 0;
+                startButton.value = "Try Again";
             }
         }
     }, 1000)
 }
-
-// start the game
-var startButton = document.getElementById("start");
-var cardQuestions = document.getElementById("questionCards")
-var questioncards = document.getElementsByClassName("questioncards");
-startButton.addEventListener("click", startGame);
-
-function startGame(){
-        setTime();
-        questionnaire();
-        console.log("we did it");
-}
-
-//Questions
-var answer1 = document.getElementById("button1");
-var answer2 = document.getElementById("button2");
-var answer3 = document.getElementById("button3");
-var answer4 = document.getElementById("button4");
-var question = document.getElementById("cardtext");
-var rightAnswer = document.getElementById("veracity");
-var incorrectAnswer = document.getElementById("veracity");
-var runningQuestion = 0;
 
 // call the questions to the cards
 function questionnaire(){
@@ -121,18 +130,18 @@ function questionnaire(){
 }
 
 var answerBtn = document.querySelectorAll(".answerBtn");
-
+console.log(answerBtn);
 for (var i = 0; i < answerBtn.length; i++) {
     answerBtn[i].addEventListener("click", function userAnswer(event) {
         event.stopPropagation();
         if (event.currentTarget.innerText === questions[runningQuestion].correct){
-        rightAnswer.textContent = "Correct + 5 sec";
-        rightAnswer.setAttribute("style", "color: black", "font-size: 1.5em");
+        veracityP.textContent = "Correct + 5 sec";
+        veracityP.setAttribute("style", "color: black", "font-size: 1.5em");
         timeleft = timeleft + 5;
         console.log("correct");
     } else {
-        incorrectAnswer.textContent = "Incorrect - 5 sec";
-        incorrectAnswer.setAttribute("style", "color: red", "font-size: 1.5em");
+        veracityP.textContent = "Incorrect - 5 sec";
+        veracityP.setAttribute("style", "color: red", "font-size: 1.5em");
         timeleft = timeleft - 5;
         console.log("Incorrect minus 5 seconds");
     }
@@ -173,4 +182,7 @@ clearHighScore.addEventListener("click", function() {
     localStorage.removeItem("highscores");
     window.location.reload();
 });
+
+// start the game
+startButton.addEventListener("click", startGame);
 

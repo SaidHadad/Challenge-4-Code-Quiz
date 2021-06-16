@@ -102,6 +102,10 @@ header h2 {
     justify-content: center;
 }
 
+.disable_a_href{
+    pointer-events: none;
+}
+
 h3 {
     font-size: 1.5em;
 }
